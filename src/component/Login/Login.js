@@ -25,7 +25,7 @@ const Login = () => {
       if (loginRes.status === 200) {
         console.log("Auth Token: ", loginRes.data.token);
 
-        localStorage.setItem('authToken', loginRes.data.token)
+        sessionStorage.setItem("authToken", loginRes.data.token);
 
         setTimeout(() => {
           alert("Login successfully");
