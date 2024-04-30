@@ -1,0 +1,16 @@
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.fixed-container {
+  @include desktop {
+    width: 1280px;
+    margin: 0 auto;
+  }
+}

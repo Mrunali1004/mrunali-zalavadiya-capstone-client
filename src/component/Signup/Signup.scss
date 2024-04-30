@@ -1,0 +1,36 @@
+@use "../../styles/partials/globals.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.site-signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: $primary-color;
+}
+
+.form {
+  padding: 0 $mobile-padding;
+  width: 100%;
+
+  @include tablet {
+    padding: 0;
+    width: 50%;
+  }
+}
+.form-label {
+  color: $primary-four;
+}
+
+.form-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 1rem;
+
+    &__btn{
+        width: 100%;
+    }
+}
