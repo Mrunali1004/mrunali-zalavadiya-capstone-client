@@ -1,40 +1,58 @@
 import React, { useEffect, useState } from "react";
 import ListofNotes from "../../component/ListofNotes/ListofNotes";
-import axios from "axios";
 import "./Home.scss";
-import { Button, Input } from "semantic-ui-react";
-import { useNavigate } from "react-router-dom";
+import { Input } from "semantic-ui-react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getAllNotes, getCategoryByKeyword } from "../../utils/data.service";
+
+const fetchData = async (setNotes) => {
+  try {
+    const response = await getAllNotes();
+    setNotes(response.data);
+  } catch (error) {
+    if (error.response.status === 404) {
+      setNotes([]);
+      return;
+    }
+    console.error("Error fetching notes:", error);
+  }
+};
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = sessionStorage.getItem("authToken");
-        console.log("object", token);
-        if (token) {
-          const response = await axios.get(`http://localhost:1010/notes`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setNotes(response.data);
-        } else {
-          console.error("Access token not found in localStorage");
-        }
-      } catch (error) {
-        console.error("Error fetching notes:", error);
-      }
-    };
+    const token = sessionStorage.getItem("authToken");
 
-    fetchData();
+    if (!token) {
+      navigate("/login");
+    }
+
+    fetchData((notes) => {setNotes(notes); setSearchResults(notes)});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   console.log(notes);
 
-  const searchItems = () => {};
+  const searchItems = async (e) => {
+    const keyword = e.target.value.trim();
+    if (keyword === "") {
+      setSearchResults(notes);
+      return;
+    }
+    try {
+      const response = await getCategoryByKeyword(keyword);
+
+      setSearchResults(response.data);
+    } catch (error) {
+      setSearchResults([])
+      console.error("Error:", error);
+    }
+  };
+
+  console.log(searchResults);
 
   return (
     <section className="fixed-container">
@@ -42,23 +60,24 @@ const Home = () => {
         <div className="homepage__container">
           <div>
             <Input
-              className="homepage__common"
+              className="homepage__commonn"
               icon="search"
               placeholder="Search..."
-              onChange={() => searchItems()}
+              onChange={(e) => searchItems(e)}
             />
           </div>
           <div>
-            <Button
-              className="homepage__common"
-              onClick={() => navigate("/addnote")}
-            >
-              Add Note
-            </Button>
+            <NavLink to="/addnote">
+              <p>Add Note</p>
+            </NavLink>
           </div>
         </div>
         <div className="homepage__notes">
-          <ListofNotes notesdata={notes} />
+          <ListofNotes
+            notesdata={searchResults.length > 0 ? searchResults : notes}
+            onNotesDeleted={() => fetchData(setNotes)}
+            hasSearchResults={searchResults.length > 0}
+          />
         </div>
       </div>
     </section>

@@ -1,11 +1,11 @@
+/* eslint-disable no-useless-escape */
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 import "./Signup.scss";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-// const API_URL = process.env.Api_url;
-// console.log(API_URL);
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -18,8 +18,6 @@ const Signup = () => {
   } = useForm();
 
   const onSubmit = async (e) => {
-    // e.preventDefault();
-    // ${API_URL}
     try {
       const signUpRes = await axios.post(`http://localhost:1010/auth/signup`, {
         username: e.username,
@@ -29,20 +27,14 @@ const Signup = () => {
       console.log(signUpRes);
 
       if (signUpRes.status === 201) {
+        toast("Registered successfully... Redirecting to Login Page....");
         setTimeout(() => {
-          alert("Registered successfully");
           navigate("/login");
-        }, 5);
+        }, 5000);
       }
     } catch (error) {
       console.log("Error: ", error);
     }
-
-    console.log(e.username);
-    console.log(e.email);
-    console.log(e.password);
-
-    // reset();
   };
 
   return (
@@ -58,38 +50,57 @@ const Signup = () => {
               type="text"
               {...register("username", { required: true, maxLength: 10 })}
             />
-            {errors.username && <p>Please check the User Name</p>}
+            {errors.username && (
+              <p className="error">Please required User Name</p>
+            )}
           </Form.Field>
           <Form.Field>
-            <label htmlFor="email" className="form-label">Email</label>
+            <label htmlFor="email" className="form-label">
+              Email
+            </label>
             <input
               placeholder="Email"
               type="email"
               {...register("email", {
                 required: true,
-                pattern:
-                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email address",
+                },
               })}
             />
           </Form.Field>
-          {errors.email && <p>Please check the Email</p>}
+          {errors.email && errors.email.type === "required" && (
+            <p className="error">Email is required</p>
+          )}
+          {errors.email && errors.email.type === "pattern" && (
+            <p className="error">Invalid email address</p>
+          )}
           <Form.Field>
-            <label htmlFor="password" className="form-label">Password</label>
+            <label htmlFor="password" className="form-label">
+              Password
+            </label>
             <input
               placeholder="Password"
               type="password"
               {...register("password", {
                 required: true,
-                pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                // pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
               })}
             />
           </Form.Field>
-          {errors.password && <p>Please check the Password</p>}
+          {errors.password && <p className="error">Please required Password</p>}
           <div className="form-button">
-            <Button type="submit" className="form-button__btn">
+            <button type="submit" className="form-button__btnnn">
               Submit
-            </Button>
+            </button>
           </div>
+
+          <Link to="/login">
+            <div className="form-data">
+              <p className="form-labell">Back to Login? Click me </p>
+            </div>
+          </Link>
         </Form>
       </section>
     </section>

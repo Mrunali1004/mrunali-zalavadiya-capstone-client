@@ -1,2 +1,66 @@
 @use "../../styles/partials/globals.scss" as *;
 @use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.Listofnotes {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.listh1{
+  padding-bottom: 1rem;
+}
+
+.listitem {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.category{
+  color: black;
+}
+
+.card {
+  background-color: $secondary-twoo;
+  height: 250px;
+  width: 390px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  overflow: hidden;
+  flex: wrap;
+  flex-direction: column;
+  border-radius: 4px;
+  // border: 1px solid black;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.btn1 {
+  cursor: pointer;
+  background-color: $secondary;
+  padding: 1rem;
+  width: 100%;
+  color: $text-color;
+  border: none;
+  text-align: center;
+}
+
+.editor {
+  overflow: hidden;
+}
+
+.division {
+  display: flex;
+  justify-content: space-between;
+}
