@@ -2,41 +2,46 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
+.homepage {
+  display: flex;
+  flex-direction: column;
+  padding: $mobile-padding;
+  background-color: $secondary-four;
 
-.homepage{
-    display: flex;
-    flex-direction: column;
-    padding: $mobile-padding;
-    background-color: $primary-color;
-
-    @include tablet{
+  @include tablet {
     padding: 1rem $tablet-padding;
+  }
+
+  @include desktop {
+    padding: 1rem 0;
+  }
+
+  &__container {
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
+  }
 
-    &__container{
-    
-        @include tablet{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+  &__common {
+    width: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 1rem;
+
+    @include tablet {
+      width: 200px;
     }
+  }
 
-    &__common{
-        width: 100%;
-
-        @include tablet{
-            width: 200px;
-        }
+  &__notes {
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
     }
-
-    &__notes{
-
-        @include tablet{
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-        }
-    }
+  }
 }

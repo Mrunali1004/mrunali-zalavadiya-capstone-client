@@ -1,9 +1,12 @@
 import React from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.scss";
+
+import { toast } from "react-toastify";
+import { updateToken } from "../../utils/data.service";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,17 +26,16 @@ const Login = () => {
       console.log(loginRes);
 
       if (loginRes.status === 200) {
-        console.log("Auth Token: ", loginRes.data.token);
-
+        console.log(loginRes.status, loginRes.data);
         sessionStorage.setItem("authToken", loginRes.data.token);
-
-        setTimeout(() => {
-          alert("Login successfully");
-          navigate("/");
-        }, 5);
+        updateToken(loginRes.data.token);
+        toast("Login Successful ");
+        navigate("/");
       }
     } catch (error) {
-      console.log("Error: ", error);
+      if (error.response && error.response.status === 404) {
+        toast("Email not found. Please check or sign up.");
+      }
     }
   };
 
@@ -50,12 +52,19 @@ const Login = () => {
               type="email"
               {...register("email", {
                 required: true,
-                pattern:
-                  /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                pattern: {
+                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email address",
+                },
               })}
             />
           </Form.Field>
-          {errors.email && <p>Please check the Email</p>}
+          {errors.email && errors.email.type === "required" && (
+            <p className="error">Email is required</p>
+          )}
+          {errors.email && errors.email.type === "pattern" && (
+            <p className="error">Invalid email address</p>
+          )}
           <Form.Field>
             <label htmlFor="password" className="form-label">
               Password
@@ -69,12 +78,18 @@ const Login = () => {
               })}
             />
           </Form.Field>
-          {errors.password && <p>Please check the Password</p>}
+          {errors.password && <p className="error">Please required Password</p>}
           <div className="form-button">
-            <Button type="submit" className="form-button__btn">
+            <button type="submit" className="form-button__btnnn">
               Submit
-            </Button>
+            </button>
           </div>
+
+          <Link to="/signup">
+            <div className="form-data">
+              <p className="form-labell">Not a member? Register</p>
+            </div>
+          </Link>
         </Form>
       </section>
     </section>

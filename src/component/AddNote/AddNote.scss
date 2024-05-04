@@ -2,10 +2,74 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
-.addnote{
+.newdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // height: 100vh;
+  background-color: $secondary-four;
+  // margin: 0 auto;
+}
+.addnote {
+  width: 100%;
+  padding: 1rem;
+
+  @include tablet {
+    padding: 36px;
+  }
+}
+.buttondiv {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  border: 1px solid green;
+}
+
+.abc {
+  width: 100%;
+}
+
+.addnote-div1 {
+  padding-bottom: 1rem;
+}
+
+.form-input {
+  border: none;
+}
+
+.form-button {
+  &__btn {
+    background-color: $secondary;
+    width: 150px;
+    color: white;
+    border: none;
+    padding: 1rem;
+  }
+}
+
+.form-add {
+  @include tablet {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__one {
+    flex: 2;
+  }
+
+  &__two {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: $primary-color;
+    margin-top: 20px;
+  }
+}
+
+.btn {
+  padding: 0.62em 1em;
+  background-color: $secondary;
+  color: white;
 }

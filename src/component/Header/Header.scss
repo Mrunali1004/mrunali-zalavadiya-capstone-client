@@ -1,0 +1,87 @@
+@use "../../styles/partials/globals.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+.ui.modal {
+  width: 90%;
+  height: auto;
+
+  @include tablet {
+    width: 40%;
+    height: auto;
+  }
+
+  @include desktop {
+    width: 600px;
+    height: auto;
+  }
+}
+
+.button {
+  background-color: $secondary;
+  color: white;
+  border: none;
+  padding: 1rem;
+  width: 150px;
+}
+
+.danger {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 1rem;
+  margin-right: 10px;
+  width: 150px;
+}
+
+.logout {
+  padding: 10px;
+  width: 150px;
+  background-color: $secondary-four;
+  border: none;
+  cursor: pointer;
+}
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $secondary;
+  color: $text-color;
+  padding: $mobile-padding;
+
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem $tablet-padding;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      gap: 20px;
+    }
+  }
+
+  &__logo {
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  &__navv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+  }
+}
