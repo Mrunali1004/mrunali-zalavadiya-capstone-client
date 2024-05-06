@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 84vh;
 
   &__header {
     width: 100%;
@@ -30,6 +31,10 @@
 
   &__category-select {
     flex: 2;
+  }
+
+  &__description {
+    padding-top: 1rem;
   }
 
   &__category-add {
@@ -65,12 +70,27 @@
   border: 1px solid green;
 }
 
+.wrap {
+  flex: 2;
+}
+
+.ui.form .field.wrap {
+  margin: 0;
+}
+
 .formnote {
   width: 100%;
   padding: 0;
 
   &__label {
     @include label;
+  }
+
+  &__con {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
   }
 
   &__input {

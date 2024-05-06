@@ -14,8 +14,8 @@
 }
 
 .iconbutton {
-  background-color: $secondary;
-  color: $text-color;
-  border: none;
-  padding: 10px;
+  background-color: $secondary !important;
+  color: $text-color !important;
+  border: none !important;
+  padding: 10px !important;
 }

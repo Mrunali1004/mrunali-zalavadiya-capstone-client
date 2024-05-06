@@ -5,9 +5,12 @@
 .notes {
   display: flex;
   gap: 20px;
+  flex-direction: column;
   margin-top: 1rem;
+  align-items: center;
   @include tablet {
     flex-wrap: wrap;
+    flex-direction: row;
   }
 
   &__add {
@@ -30,6 +33,12 @@
     padding: 1rem;
     border: 2px dotted $out-line-color;
     color: $font-color-dark;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__no-results {
@@ -98,7 +107,6 @@
 .custom-segment {
   &.ui.segment {
     padding: 0;
-    margin: 0;
   }
   .card {
     margin: 0;
@@ -107,23 +115,34 @@
   .card {
     gap: 0;
     .title {
-      font-size: 24px;
       margin-bottom: 16px;
-      line-height: 24px;
+      @include tablet-heading-1;
+      font-weight: 700;
     }
     .editor {
       height: 100%;
       background-color: transparent;
+      @include tablet-body-p1;
+      font-weight: 700;
     }
     .small {
       text-align: right;
       display: block;
-      // color: adjust-color($color: $primary-two, $lightness: 20%);
-      font-size: 12px;
       margin-right: 12px;
+      color: $font-color-dark;
+      font-weight: 700;
+      @include tablet-body-p1;
     }
   }
 }
 .ui.segment:last-child {
   margin-bottom: 14px !important;
+}
+
+.ui.attached.label,
+.ui[class*="top attached"].label {
+  background-color: $secondary;
+  color: $text-color;
+  font-weight: 700;
+  @include tablet-heading-3;
 }

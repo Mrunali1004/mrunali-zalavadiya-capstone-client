@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Icon, Input } from "semantic-ui-react";
+import { Icon, Input } from "semantic-ui-react";
 import "./InPlaceEditInput.scss";
 
 export default function InPlaceEditInput({ onEditSuccessful, value }) {
@@ -27,20 +27,17 @@ export default function InPlaceEditInput({ onEditSuccessful, value }) {
         <>
           <Input error={inputError} value={inputValue} onChange={onChange} />
           {inputError && <small>Field can not be blank</small>}
-          <Button circular onClick={onSave} basic color="green" icon>
+          <button className="iconbutton" onClick={onSave} type="button">
             <Icon name="save" />
-          </Button>
+          </button>
         </>
       ) : (
         <>
           {inputValue}
           <button
             className="iconbutton"
-            circular
+            type="button"
             onClick={() => setEditMode(true)}
-            basic
-            color="blue"
-            icon
           >
             <Icon name="edit" />
           </button>
