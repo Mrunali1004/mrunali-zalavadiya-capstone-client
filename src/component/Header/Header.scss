@@ -18,30 +18,11 @@
   }
 }
 
-.button {
-  background-color: $secondary;
-  color: white;
-  border: none;
-  padding: 1rem;
-  width: 150px;
-}
-
-.danger {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 1rem;
-  margin-right: 10px;
-  width: 150px;
-}
-
 .logout {
-  padding: 10px;
-  width: 150px;
-  background-color: $secondary-four;
-  border: none;
-  cursor: pointer;
+  @include btn;
+  font-weight: 600;
 }
+
 .site-header {
   display: flex;
   flex-direction: column;
@@ -57,31 +38,52 @@
     padding: 1rem $tablet-padding;
   }
 
-  &__container {
+  &__title {
+    @include mobile-heading-1;
+    font-weight: 700;
+
+    @include tablet {
+      @include tablet-heading-1;
+    }
+  }
+  &__user-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 1rem;
     @include tablet {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-direction: row;
       gap: 20px;
+      padding: 0;
     }
   }
 
-  &__logo {
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-  }
-
-  &__navv {
+  &__user-info {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    flex-direction: row;
-    gap: 20px;
+    gap: 10px;
+
+    @include tablet {
+      flex-direction: row;
+    }
+  }
+
+  &__userwrapper {
+    flex: 1;
+  }
+
+  &__username {
+    @include mobile-body-p1;
+    font-weight: 700;
+
+    @include tablet {
+      @include tablet-heading-3;
+    }
   }
 }

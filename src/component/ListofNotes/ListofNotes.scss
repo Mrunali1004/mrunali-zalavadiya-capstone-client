@@ -2,46 +2,76 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
-.Listofnotes {
+.notes {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 20px;
+  margin-top: 1rem;
+  @include tablet {
+    flex-wrap: wrap;
+  }
+
+  &__add {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    height: 250px;
+    width: 390px;
+  }
+
+  &__add-content {
+    background-color: $primary-four;
+    height: 250px;
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: 2px dotted $out-line-color;
+    color: $font-color-dark;
+  }
+
+  &__no-results {
+    @include mobile-heading-1;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    padding-top: 1rem;
+
+    @include tablet {
+      @include tablet-heading-2;
+    }
+  }
 }
 
-.listh1{
+.listh1 {
   padding-bottom: 1rem;
 }
 
-.listitem {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
 .card-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
 
-.category{
+.category {
   color: black;
 }
 
+.listitem {
+  flex-grow: 1;
+}
+
 .card {
-  background-color: $secondary-twoo;
+  background-color: $primary-four;
   height: 250px;
   width: 390px;
   display: flex;
   justify-content: space-between;
-  gap: 20px;
   overflow: hidden;
-  flex: wrap;
   flex-direction: column;
   border-radius: 4px;
-  // border: 1px solid black;
   margin: 1rem 0;
   padding: 1rem;
 }
@@ -62,5 +92,38 @@
 
 .division {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.custom-segment {
+  &.ui.segment {
+    padding: 0;
+    margin: 0;
+  }
+  .card {
+    margin: 0;
+  }
+
+  .card {
+    gap: 0;
+    .title {
+      font-size: 24px;
+      margin-bottom: 16px;
+      line-height: 24px;
+    }
+    .editor {
+      height: 100%;
+      background-color: transparent;
+    }
+    .small {
+      text-align: right;
+      display: block;
+      // color: adjust-color($color: $primary-two, $lightness: 20%);
+      font-size: 12px;
+      margin-right: 12px;
+    }
+  }
+}
+.ui.segment:last-child {
+  margin-bottom: 14px !important;
 }

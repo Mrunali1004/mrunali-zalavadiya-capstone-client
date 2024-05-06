@@ -23,18 +23,17 @@ const Login = () => {
         email: e.email,
         password: e.password,
       });
-      console.log(loginRes);
 
       if (loginRes.status === 200) {
         console.log(loginRes.status, loginRes.data);
         sessionStorage.setItem("authToken", loginRes.data.token);
-        updateToken(loginRes.data.token);
-        toast("Login Successful ");
+        updateToken();
+        toast.success("Login Successful");
         navigate("/");
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast("Email not found. Please check or sign up.");
+        toast.error("Email not found. Please check or sign up.", {progress: undefined});
       }
     }
   };

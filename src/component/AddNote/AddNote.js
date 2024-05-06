@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import "./AddNote.scss";
 import { useForm } from "react-hook-form";
-import { Form, Modal } from "semantic-ui-react";
+import { Container, Form, Header, Icon, Segment } from "semantic-ui-react";
 import {
-  addSingleCategory,
   createSingleNote,
   getCategories,
   getSingleNote,
   updateSingleNote,
 } from "../../utils/data.service";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import MDEditor from "@uiw/react-md-editor";
 import { toast } from "react-toastify";
+import EditCategoryModal from "../../component/EditCategoryModel/EditCategoryModal";
 
 const AddNote = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [getcategory, setGetCategory] = useState([]);
-  const [newCategoryAdded, setNewCategoryAdded] = useState(true);
+  const [categories, setCategories] = useState([]);
   const [content, setContent] = useState("");
   const [showModal, setShowModal] = useState(false);
 
@@ -27,34 +27,37 @@ const AddNote = () => {
     handleSubmit,
     formState: { errors },
     setValue,
+    getValues,
   } = useForm();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getCategories();
-        setGetCategory(response.data);
+        setCategories(response.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
     };
-
-    newCategoryAdded && fetchData();
-  }, [newCategoryAdded]);
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    (async () => {
+    const setData = async () => {
       try {
         if (!id) return;
         const response = await getSingleNote(id);
         const { title, categoryId, content } = response.data;
-        setValue("title", title, { shouldValidate: true });
-        setValue("categoryId", categoryId, { shouldValidate: true });
-        setContent(content);
+        setTimeout(() => {
+          setValue("categoryId", `${categoryId}`, { shouldDirty: true });
+          setContent(content);
+          setValue("title", title, { shouldDirty: true });
+        }, 100);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
-    })();
+    };
+    setData();
   }, [id, setValue]);
 
   const onSubmit = async (e) => {
@@ -63,11 +66,13 @@ const AddNote = () => {
         ? createSingleNote({ ...e, content })
         : updateSingleNote(id, { ...e, content });
 
-        toast("Added");
-        navigate("/");
-  
+      toast.success(
+        id ? "Note Edited Successfully.." : "Note added successfully.."
+      );
+      navigate("/home");
     } catch (error) {
       console.log("Error", error);
+      toast.error(e.message);
     }
   };
 
@@ -75,53 +80,49 @@ const AddNote = () => {
     setShowModal(true);
   };
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (updatedCategories) => {
+    console.log("calling");
+    setCategories(updatedCategories);
     setShowModal(false);
   };
 
-  const handleAddCategory = async (e) => {
-    e.preventDefault();
-    const categoryName = e.target.categoryName.value;
-    setNewCategoryAdded(false);
-    await addSingleCategory(categoryName);
-    setNewCategoryAdded(true);
-    setShowModal(false);
-  };
+  if (searchParams.get("preview")) {
+    return (
+      <Container text style={{ marginTop: "24px" }}>
+        <div className="addnote-div1">
+          <Icon name="long arrow alternate left" onClick={() => navigate(-1)} />
+          <Icon name="pencil" onClick={() => setSearchParams({})} />
+        </div>
+        <Segment padded>
+          <Header as="h1">{getValues("title")}</Header>
 
-  // const deleteCategory = async (id) => {
-  //   try {
-  //     const response = await deleteCategory(id);
-  //     console.log(response.data);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
-
-  // const submit = () => {
-  //   setTimeout(() => {
-  //     toast("Added");
-  //     navigate("/");
-  //   }, 5);
-  // };
+          <MDEditor.Markdown
+            source={content}
+            style={{ whiteSpace: "pre-wrap", backgroundColor: "transparent" }}
+          />
+        </Segment>
+      </Container>
+    );
+  }
 
   return (
     <section className="fixed-container">
-      <div className="newdiv">
-        <div className="addnote">
-          <div className="addnote-div1">
+      <div className="note-form">
+        <div className="note-form__header">
+          <div className="note-form__icon-container">
             <i
               className="long arrow alternate left icon"
               onClick={() => navigate(-1)}
             ></i>
           </div>
-          <div className="addnote-div2">
-            <Form onSubmit={handleSubmit(onSubmit)} className="abc">
-              <Form.Field>
-                <label htmlFor="title" className="form-label">
+          <div>
+            <Form onSubmit={handleSubmit(onSubmit)} className="formnote">
+              <Form.Field className="mrunali">
+                <label htmlFor="title" className="formnote__label">
                   Title
                 </label>
                 <input
-                  className="form-input"
+                  className="formnote__input"
                   placeholder="Enter a Title"
                   type="text"
                   {...register("title", {
@@ -130,19 +131,20 @@ const AddNote = () => {
                 />
               </Form.Field>
               {errors.title && <p className="error">Please required Title</p>}
-              <div className="form-add">
-                <div className="form-add__one">
+              <div className="note-form__category">
+                <div className="note-form__category-select">
                   <Form.Field>
                     <label htmlFor="categoryId" className="form-label">
                       Category
                     </label>
                     <select
+                      className="note-form__category-input"
                       {...register("categoryId", {
                         required: true,
                       })}
                     >
                       <option value="">Select a category</option>
-                      {getcategory.map((category) => {
+                      {categories.map((category) => {
                         return (
                           <option key={category.id} value={category.id}>
                             {category.categoryName}
@@ -150,19 +152,19 @@ const AddNote = () => {
                         );
                       })}
                     </select>
-                    {errors.category && <p>Please select a Category</p>}
+                    {errors.category && (
+                      <p className="error">Please select a Category</p>
+                    )}
                   </Form.Field>
                 </div>
-                <div className="form-add__two">
-                  <button onClick={addCategory} className="btn">
+                <div className="note-form__category-add">
+                  <button
+                    onClick={addCategory}
+                    className="note-form__category-btn"
+                  >
                     +
                   </button>
                 </div>
-                {/* <div className="form-add__two">
-                  <button onClick={() => deleteCategory(id)} className="btn">
-                    -
-                  </button>
-                </div> */}
               </div>
 
               <div>
@@ -176,15 +178,13 @@ const AddNote = () => {
                     placeholder: "Please enter Markdown text",
                   }}
                 />
-                {errors.content && <p>Please check the Content</p>}
+                {errors.content && (
+                  <p className="error">Please check the Content</p>
+                )}
               </div>
-              <div className="form-button">
-                <button
-                  type="submit"
-                  className="form-button__btn"
-                  // onClick={submit}
-                >
-                  Submit
+              <div className="note-form__actions">
+                <button type="submit" className="note-form__actions-btn">
+                  {id ? "Save Note" : "Create Note"}
                 </button>
               </div>
             </Form>
@@ -192,25 +192,11 @@ const AddNote = () => {
         </div>
       </div>
 
-      <Modal open={showModal} onClose={handleCloseModal}>
-        <Modal.Header>Add Category</Modal.Header>
-        <Modal.Content>
-          <Form onSubmit={handleAddCategory}>
-            <Form.Field>
-              <label>New Category Name</label>
-              <input name="categoryName" placeholder="New Category" />
-            </Form.Field>
-            <Modal.Actions>
-              <button className="btn" type="button" onClick={handleCloseModal}>
-                Cancel
-              </button>
-              <button className="btn" type="submit">
-                Add Category
-              </button>
-            </Modal.Actions>
-          </Form>
-        </Modal.Content>
-      </Modal>
+      <EditCategoryModal
+        open={showModal}
+        setOpen={setShowModal}
+        onModalClose={handleCloseModal}
+      />
     </section>
   );
 };

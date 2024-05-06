@@ -27,6 +27,11 @@ const addSingleCategory = async (categoryName) => {
   return await service.post(`category`, { categoryName });
 };
 
+const editSingleCategory = async (id, categoryName) => {
+  updateToken();
+  return await service.put(`category/${id}`, { categoryName });
+};
+
 const deleteCategory = async (id) => {
   updateToken();
   return await service.delete(`category/${id}`);
@@ -81,4 +86,5 @@ export {
   getAllNotesByCategoryId,
   deleteSingleNote,
   addSingleCategory,
+  editSingleCategory
 };
