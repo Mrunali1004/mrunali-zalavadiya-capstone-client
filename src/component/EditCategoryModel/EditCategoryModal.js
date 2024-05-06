@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import {
-  Button,
   Header,
   Icon,
-  Input,
   List,
   Modal,
   ModalActions,
@@ -37,6 +35,9 @@ export default function EditCategoryModal({ open, setOpen, onModalClose }) {
   const handleCategoryEdit = async (id, newValue) => {
     try {
       const response = await editSingleCategory(id, newValue);
+      const { category } = response.data; 
+const updatedCategory = categories.map(c => c.id === id ? category : c);
+setCategories(updatedCategory)
       toast.success(response.data.message);
     } catch (e) {
       toast.error(e.message);

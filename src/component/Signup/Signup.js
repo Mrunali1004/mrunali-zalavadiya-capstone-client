@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 import React from "react";
-import { Form } from "semantic-ui-react";
+import { Form, Segment } from "semantic-ui-react";
 import { useForm } from "react-hook-form";
 import "./Signup.scss";
 import axios from "axios";
@@ -38,8 +38,9 @@ const Signup = () => {
   };
 
   return (
-    <section className="fixed-container">
-      <section className="site-signup">
+    // <section className="fixed-container">
+    <section className="site-signup">
+      <Segment>
         <Form onSubmit={handleSubmit(onSubmit)} className="form">
           <Form.Field>
             <label htmlFor="username" className="form-label">
@@ -48,7 +49,7 @@ const Signup = () => {
             <input
               placeholder="User Name"
               type="text"
-              {...register("username", { required: true, maxLength: 10 })}
+              {...register("username", { required: true })}
             />
             {errors.username && (
               <p className="error">Please required User Name</p>
@@ -85,24 +86,39 @@ const Signup = () => {
               type="password"
               {...register("password", {
                 required: true,
-                // pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters long",
+                },
+                pattern: {
+                  value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                  message:
+                    "Password must contain at least one lowercase letter, one uppercase letter, and one digit",
+                },
               })}
             />
           </Form.Field>
-          {errors.password && <p className="error">Please required Password</p>}
+          {errors.password && errors.password.type === "required" && (
+            <p className="error">Password is required</p>
+          )}
+          {errors.password && errors.password.type === "minLength" && (
+            <p className="error">{errors.password.message}</p>
+          )}
+          {errors.password && errors.password.type === "pattern" && (
+            <p className="error">{errors.password.message}</p>
+          )}
           <div className="form-button">
             <button type="submit" className="form-button__btnnn">
               Submit
             </button>
           </div>
-
           <Link to="/login">
             <div className="form-data">
               <p className="form-labell">Back to Login? Click me </p>
             </div>
           </Link>
         </Form>
-      </section>
+      </Segment>
     </section>
   );
 };

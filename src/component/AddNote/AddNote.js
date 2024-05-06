@@ -82,26 +82,33 @@ const AddNote = () => {
 
   const handleCloseModal = (updatedCategories) => {
     console.log("calling");
+    console.log(updatedCategories)
     setCategories(updatedCategories);
     setShowModal(false);
   };
 
   if (searchParams.get("preview")) {
     return (
-      <Container text style={{ marginTop: "24px" }}>
-        <div className="addnote-div1">
-          <Icon name="long arrow alternate left" onClick={() => navigate(-1)} />
-          <Icon name="pencil" onClick={() => setSearchParams({})} />
+      <div className="container">
+        <div className="container__div1">
+          <div>
+            <Icon
+              name="long arrow alternate left "
+              onClick={() => navigate(-1)}
+            />
+          </div>
+          <div>
+            <Icon name="pencil" onClick={() => setSearchParams({})} />
+          </div>
         </div>
-        <Segment padded>
-          <Header as="h1">{getValues("title")}</Header>
-
+        <div className="container__div2">
+          <h1>{getValues("title")}</h1>
           <MDEditor.Markdown
             source={content}
             style={{ whiteSpace: "pre-wrap", backgroundColor: "transparent" }}
           />
-        </Segment>
-      </Container>
+        </div>
+      </div>
     );
   }
 

@@ -21,9 +21,10 @@
 .logout {
   background-color: transparent;
   border: none;
-  color: $text-color;
   cursor: pointer;
   font-weight: 400;
+  @include mobile-heading-2;
+  color: $secondary;
 }
 
 .site-header {
@@ -31,9 +32,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: $secondary;
   color: $text-color;
   padding: $mobile-padding;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
 
   @include tablet {
     flex-direction: row;
@@ -57,9 +61,14 @@
     @include mobile-heading-1;
     font-weight: 700;
     margin: 0;
+    border: 3px dotted $secondary;
+    padding: 1rem;
+    background-color: $secondary-four;
 
     @include tablet {
-      @include tablet-heading-1;
+      @include tablet-heading-2;
+      color: $secondary;
+      font-weight: bold;
     }
   }
   &__user-section {
@@ -99,7 +108,8 @@
     font-weight: 700;
 
     @include tablet {
-      @include tablet-heading-3;
+      @include mobile-heading-2;
+      color: $secondary;
     }
   }
 }

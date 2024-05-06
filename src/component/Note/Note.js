@@ -32,7 +32,9 @@ export default function Note({
             <h3 className="title">
               <NavLink to={`/edit/${id}?preview=true`}>{title}</NavLink>
             </h3>
-
+            <span className="small">
+              Modified on: {new Date(modified_at).toLocaleDateString()}
+            </span>
             <hr />
           </div>
 
@@ -43,15 +45,12 @@ export default function Note({
             />
           </div>
           <div className="division">
-            <span className="small">
-              Modified on: {new Date(modified_at).toLocaleDateString()}
-            </span>
             <div>
               <NavLink to={`/edit/${id}`}>
                 <Icon color="black" name="edit" />
               </NavLink>
             </div>
-            <div>
+            <div className="delete">
               <Icon color="red" name="trash" onClick={() => btndelete(id)} />
             </div>
           </div>
