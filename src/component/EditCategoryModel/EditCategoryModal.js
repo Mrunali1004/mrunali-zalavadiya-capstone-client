@@ -92,9 +92,9 @@ export default function EditCategoryModal({ open, setOpen, onModalClose }) {
         </div>
       </ModalContent>
       <ModalActions>
-        <Button color="green" inverted onClick={() => onModalClose(categories)}>
+        <button className="iconbutton" onClick={() => onModalClose(categories)}>
           <Icon name="checkmark" /> Save and Close
-        </Button>
+        </button>
       </ModalActions>
     </Modal>
   );

@@ -33,7 +33,9 @@ const Login = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 404) {
-        toast.error("Email not found. Please check or sign up.", {progress: undefined});
+        toast.error("Email not found. Please check or sign up.", {
+          progress: undefined,
+        });
       }
     }
   };
@@ -73,7 +75,6 @@ const Login = () => {
               type="password"
               {...register("password", {
                 required: true,
-                // pattern: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,15}$/,
               })}
             />
           </Form.Field>

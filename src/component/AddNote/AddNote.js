@@ -62,21 +62,21 @@ const AddNote = () => {
 
   const onSubmit = async (e) => {
     try {
-      (await !id)
-        ? createSingleNote({ ...e, content })
-        : updateSingleNote(id, { ...e, content });
+      !id
+        ? await createSingleNote({ ...e, content })
+        : await updateSingleNote(id, { ...e, content });
 
       toast.success(
         id ? "Note Edited Successfully.." : "Note added successfully.."
       );
-      navigate("/home");
+      navigate("/", { replace: true });
     } catch (error) {
       console.log("Error", error);
       toast.error(e.message);
     }
   };
 
-  const addCategory = async () => {
+  const addCategory = () => {
     setShowModal(true);
   };
 
@@ -117,60 +117,60 @@ const AddNote = () => {
           </div>
           <div>
             <Form onSubmit={handleSubmit(onSubmit)} className="formnote">
-              <Form.Field className="mrunali">
-                <label htmlFor="title" className="formnote__label">
-                  Title
-                </label>
-                <input
-                  className="formnote__input"
-                  placeholder="Enter a Title"
-                  type="text"
-                  {...register("title", {
-                    required: true,
-                  })}
-                />
-              </Form.Field>
-              {errors.title && <p className="error">Please required Title</p>}
-              <div className="note-form__category">
-                <div className="note-form__category-select">
-                  <Form.Field>
-                    <label htmlFor="categoryId" className="form-label">
-                      Category
-                    </label>
-                    <select
-                      className="note-form__category-input"
-                      {...register("categoryId", {
-                        required: true,
-                      })}
+              <div className="formnote__con">
+                <Form.Field className="wrap">
+                  <label htmlFor="title" className="formnote__label">
+                    Title
+                  </label>
+                  <input
+                    className="formnote__input"
+                    placeholder="Enter a Title"
+                    type="text"
+                    {...register("title", {
+                      required: true,
+                    })}
+                  />
+                </Form.Field>
+                {errors.title && <p className="error">Please required Title</p>}
+                <div className="note-form__category">
+                  <div className="note-form__category-select">
+                    <Form.Field>
+                      <label htmlFor="categoryId" className="form-label">
+                        Category
+                      </label>
+                      <select
+                        className="note-form__category-input"
+                        {...register("categoryId", {
+                          required: true,
+                        })}
+                      >
+                        <option value="">Select a category</option>
+                        {categories.map((category) => {
+                          return (
+                            <option key={category.id} value={category.id}>
+                              {category.categoryName}
+                            </option>
+                          );
+                        })}
+                      </select>
+                      {errors.category && (
+                        <p className="error">Please select a Category</p>
+                      )}
+                    </Form.Field>
+                  </div>
+                  <div className="note-form__category-add">
+                    <button
+                      type="button"
+                      onClick={addCategory}
+                      className="note-form__category-btn"
                     >
-                      <option value="">Select a category</option>
-                      {categories.map((category) => {
-                        return (
-                          <option key={category.id} value={category.id}>
-                            {category.categoryName}
-                          </option>
-                        );
-                      })}
-                    </select>
-                    {errors.category && (
-                      <p className="error">Please select a Category</p>
-                    )}
-                  </Form.Field>
-                </div>
-                <div className="note-form__category-add">
-                  <button
-                    onClick={addCategory}
-                    className="note-form__category-btn"
-                  >
-                    +
-                  </button>
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="content" className="form-label">
-                  Content
-                </label>
+              <div className="note-form__description">
                 <MDEditor
                   value={content}
                   onChange={setContent}

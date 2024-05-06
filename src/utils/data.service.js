@@ -86,5 +86,5 @@ export {
   getAllNotesByCategoryId,
   deleteSingleNote,
   addSingleCategory,
-  editSingleCategory
+  editSingleCategory,
 };

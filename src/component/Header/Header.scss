@@ -19,8 +19,11 @@
 }
 
 .logout {
-  @include btn;
-  font-weight: 600;
+  background-color: transparent;
+  border: none;
+  color: $text-color;
+  cursor: pointer;
+  font-weight: 400;
 }
 
 .site-header {
@@ -38,9 +41,22 @@
     padding: 1rem $tablet-padding;
   }
 
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__logo {
+    height: 50px;
+    width: 50px;
+  }
+
   &__title {
     @include mobile-heading-1;
     font-weight: 700;
+    margin: 0;
 
     @include tablet {
       @include tablet-heading-1;

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { Icon } from "semantic-ui-react";
 import Note from "../../component/Note/Note";
 
-
 const ListofNotes = ({ notesdata, hasSearchResults, onNotesDeleted }) => {
   return (
     <div className="notes">
@@ -19,14 +18,16 @@ const ListofNotes = ({ notesdata, hasSearchResults, onNotesDeleted }) => {
         </div>
       </div>
       {!hasSearchResults ? (
-          <>
-            <p className="notes__no-results">
-              No notes found.
-            </p>
-          </>
-        ) : (
-          notesdata.map((e) => <Note key={e.id} {...e} onNotesDeleted={onNotesDeleted} />)
-        )}
+        <>
+          {/* <div className="notes__wrapper">
+            <p className="notes__no-results">No notes found.</p>
+          </div> */}
+        </>
+      ) : (
+        notesdata.map((e) => (
+          <Note key={e.id} {...e} onNotesDeleted={onNotesDeleted} />
+        ))
+      )}
     </div>
   );
 };

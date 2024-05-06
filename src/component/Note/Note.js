@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Icon, Label, Segment } from "semantic-ui-react";
 import { deleteSingleNote } from "../../utils/data.service";
 import { toast } from "react-toastify";
+import "./Note.scss";
 
 export default function Note({
   id,
@@ -56,7 +57,7 @@ export default function Note({
           </div>
         </div>
       </div>
-      <Label color="teal" attached="bottom left">
+      <Label attached="bottom left" className="category-label">
         {categoryName}
       </Label>
     </Segment>

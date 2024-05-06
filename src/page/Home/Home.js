@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ListofNotes from "../../component/ListofNotes/ListofNotes";
 import "./Home.scss";
-// import { Input } from "semantic-ui-react";
 import { getAllNotes, getCategoryByKeyword } from "../../utils/data.service";
 import { toast } from "react-toastify";
 
@@ -14,31 +13,21 @@ const fetchData = async (setNotes) => {
       setNotes([]);
       return;
     }
-    console.error("Error fetching notes:", error);
+    toast.error("Error fetching notes:", error.message);
   }
 };
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
-
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAllNotes();
-        setNotes(response.data);
-        setSearchResults(response.data);
-      } catch (error) {
-        if (error.response.status === 404) {
-          setNotes([]);
-          return;
-        }
-        console.error("Error fetching notes:", error);
-      }
-    };
-    fetchData();
+    fetchData((notes) => {
+      setNotes(notes);
+      setSearchResults(notes);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   const searchItems = async (e) => {
     const keyword = e.target.value.trim();
     if (keyword === "") {
@@ -51,11 +40,8 @@ const Home = () => {
       setSearchResults(response.data);
     } catch (error) {
       setSearchResults([]);
-      toast.error(error.message);
     }
   };
-
-  console.log(searchResults);
 
   return (
     <section className="fixed-container">
