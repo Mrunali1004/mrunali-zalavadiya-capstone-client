@@ -2,20 +2,60 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
-.newdiv {
+.note-form {
   display: flex;
   justify-content: center;
   align-items: center;
-  // height: 100vh;
-  background-color: $secondary-four;
-  // margin: 0 auto;
-}
-.addnote {
-  width: 100%;
-  padding: 1rem;
 
-  @include tablet {
-    padding: 36px;
+  &__header {
+    width: 100%;
+    padding: 1rem;
+
+    @include tablet {
+      padding: 36px;
+    }
+  }
+
+  &__icon-container {
+    padding-bottom: 1rem;
+  }
+
+  &__category {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  &__category-select {
+    flex: 2;
+  }
+
+  &__category-add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 22px;
+  }
+
+  &__category-btn {
+    padding: 0.62em 1em;
+    background-color: $secondary;
+    color: $text-color;
+    border: none;
+  }
+  &__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+  }
+  &__actions-btn {
+    background-color: $secondary;
+    color: $text-color;
+    border: none;
+    padding: 1rem;
   }
 }
 .buttondiv {
@@ -25,51 +65,20 @@
   border: 1px solid green;
 }
 
-.abc {
+.formnote {
   width: 100%;
-}
+  padding: 0;
 
-.addnote-div1 {
-  padding-bottom: 1rem;
-}
-
-.form-input {
-  border: none;
-}
-
-.form-button {
-  &__btn {
-    background-color: $secondary;
-    width: 150px;
-    color: white;
-    border: none;
-    padding: 1rem;
-  }
-}
-
-.form-add {
-  @include tablet {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+  &__label {
+    @include label;
   }
 
-  &__one {
-    flex: 2;
+  &__input {
+    @include Input;
+    color: $font-color-dark !important;
   }
 
-  &__two {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  &__input:focus {
+    border: 2px solid $out-line-color !important;
   }
-}
-
-.btn {
-  padding: 0.62em 1em;
-  background-color: $secondary;
-  color: white;
 }

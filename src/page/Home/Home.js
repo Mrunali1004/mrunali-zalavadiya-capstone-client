@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ListofNotes from "../../component/ListofNotes/ListofNotes";
 import "./Home.scss";
-import { Input } from "semantic-ui-react";
-import { NavLink, useNavigate } from "react-router-dom";
+// import { Input } from "semantic-ui-react";
 import { getAllNotes, getCategoryByKeyword } from "../../utils/data.service";
+import { toast } from "react-toastify";
 
 const fetchData = async (setNotes) => {
   try {
@@ -20,22 +20,25 @@ const fetchData = async (setNotes) => {
 
 const Home = () => {
   const [notes, setNotes] = useState([]);
-  const navigate = useNavigate();
   const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("authToken");
-
-    if (!token) {
-      navigate("/login");
-    }
-
-    fetchData((notes) => {setNotes(notes); setSearchResults(notes)});
+    const fetchData = async () => {
+      try {
+        const response = await getAllNotes();
+        setNotes(response.data);
+        setSearchResults(response.data);
+      } catch (error) {
+        if (error.response.status === 404) {
+          setNotes([]);
+          return;
+        }
+        console.error("Error fetching notes:", error);
+      }
+    };
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(notes);
-
   const searchItems = async (e) => {
     const keyword = e.target.value.trim();
     if (keyword === "") {
@@ -47,8 +50,8 @@ const Home = () => {
 
       setSearchResults(response.data);
     } catch (error) {
-      setSearchResults([])
-      console.error("Error:", error);
+      setSearchResults([]);
+      toast.error(error.message);
     }
   };
 
@@ -56,26 +59,26 @@ const Home = () => {
 
   return (
     <section className="fixed-container">
-      <div className="homepage">
-        <div className="homepage__container">
+      <div className="notes-search">
+        <div className="notes-search__input">
           <div>
-            <Input
-              className="homepage__commonn"
+            <input
+              className="notes-search__input-field"
               icon="search"
               placeholder="Search..."
               onChange={(e) => searchItems(e)}
             />
           </div>
-          <div>
-            <NavLink to="/addnote">
-              <p>Add Note</p>
-            </NavLink>
-          </div>
         </div>
-        <div className="homepage__notes">
+        <div className="notes-search__notes-list">
           <ListofNotes
             notesdata={searchResults.length > 0 ? searchResults : notes}
-            onNotesDeleted={() => fetchData(setNotes)}
+            onNotesDeleted={() =>
+              fetchData((notes) => {
+                setNotes(notes);
+                setSearchResults(notes);
+              })
+            }
             hasSearchResults={searchResults.length > 0}
           />
         </div>

@@ -1,0 +1,22 @@
+@use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.edit-category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  &__inputdata {
+    @include Input;
+  }
+
+  &__addbtn {
+    background-color: $secondary;
+    padding: 1rem;
+    border: none;
+    color: $text-color;
+    @include tablet-heading-3;
+    font-weight: bold;
+  }
+}

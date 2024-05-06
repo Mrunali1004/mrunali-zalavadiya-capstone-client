@@ -2,11 +2,10 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
-.homepage {
+.notes-search {
   display: flex;
   flex-direction: column;
   padding: $mobile-padding;
-  background-color: $secondary-four;
 
   @include tablet {
     padding: 1rem $tablet-padding;
@@ -16,27 +15,24 @@
     padding: 1rem 0;
   }
 
-  &__container {
+  &__input {
     @include tablet {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
     }
   }
 
-  &__common {
-    width: 100%;
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 1rem;
+  &__input-field {
+    @include Input;
+    @include InputFocus;
 
     @include tablet {
-      width: 200px;
+      width: 387px;
     }
   }
 
-  &__notes {
+  &__notes-list {
     @include tablet {
       display: flex;
       flex-direction: row;

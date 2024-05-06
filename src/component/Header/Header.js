@@ -15,25 +15,26 @@ const Header = () => {
 
   const btnlogout = () => {
     sessionStorage.removeItem("authToken");
-    navigate("/");
-    window.location.reload();
+    navigate("/login");
   };
 
   return (
-    <section className="fixed-container">
+    <section>
       <div className="site-header">
         <div>
-          <h1>Personal Note Hub</h1>
+          <h1 className="site-header__title">Personal Note Hub</h1>
         </div>
 
-        <div className="site-header__container">
-          <div className="site-header__navv">
+        <div className="site-header__user-section">
+          <div className="site-header__user-info">
             {token ? (
               <>
-                <div>
-                  <p>{decodedToken.username}</p>
+                <div className="site-header__userwrapper">
+                  <p className="site-header__username">
+                    {decodedToken.username}
+                  </p>
                 </div>
-                <div>
+                <div className="site-header__userwrapper">
                   <button className="logout" onClick={btnlogout}>
                     Logout
                   </button>

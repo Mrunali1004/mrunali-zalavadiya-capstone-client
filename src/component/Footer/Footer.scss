@@ -3,18 +3,18 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/typography.scss" as *;
 
-.footer {
-  background-color: $secondary;
-}
 .site-footer {
-  color: $text-color;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: $mobile-padding;
-  font-weight: 700;
+  background-color: $secondary;
+  &__content {
+    color: $text-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $mobile-padding;
+    font-weight: 700;
 
-  @include tablet {
-    padding: 1rem $tablet-padding;
+    @include tablet {
+      padding: 1rem $tablet-padding;
+    }
   }
 }
