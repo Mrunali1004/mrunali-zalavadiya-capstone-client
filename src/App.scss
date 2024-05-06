@@ -1,20 +1,24 @@
 @use "./styles/partials/variable.scss" as *;
 @use "./styles/partials/globals.scss" as *;
 
-
-.w-md-editor-text-input{
-    -webkit-text-fill-color: black !important;
+.w-md-editor-text-input {
+  -webkit-text-fill-color: black !important;
 }
 
-#root{
-    background-color: $secondary-four;
-    min-height: 100vh;
-    padding-bottom: 48px;
-    position: relative;
+#root {
+  background-color: $secondary-four;
+  min-height: 100vh;
+  padding-bottom: 48px;
+  position: relative;
+  background-image: url("../src/assets/image/_bg1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(1);
 }
-.footer{
-    display: block;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
+.footer {
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }

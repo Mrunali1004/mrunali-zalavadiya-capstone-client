@@ -2,11 +2,18 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
+.ui.segment {
+  width: 300px !important;
+}
+
 .site-signup {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 84vh;
+  // margin: 0 auto;
+  width: 100%;
+  padding-top: 88.8px;
 }
 
 .error {

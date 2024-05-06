@@ -6,7 +6,7 @@ import Note from "../../component/Note/Note";
 
 const ListofNotes = ({ notesdata, hasSearchResults, onNotesDeleted }) => {
   return (
-    <div className="notes">
+    <div className="notes fixed-container">
       <div className="notes__add">
         <div>
           <NavLink to="/addnote">
@@ -18,11 +18,7 @@ const ListofNotes = ({ notesdata, hasSearchResults, onNotesDeleted }) => {
         </div>
       </div>
       {!hasSearchResults ? (
-        <>
-          {/* <div className="notes__wrapper">
-            <p className="notes__no-results">No notes found.</p>
-          </div> */}
-        </>
+        <></>
       ) : (
         notesdata.map((e) => (
           <Note key={e.id} {...e} onNotesDeleted={onNotesDeleted} />
