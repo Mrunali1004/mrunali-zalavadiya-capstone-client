@@ -98,7 +98,7 @@ const AddNote = () => {
             />
           </div>
           <div>
-            <Icon name="pencil" onClick={() => setSearchParams({})} />
+            <Icon name="edit" onClick={() => setSearchParams({})} />
           </div>
         </div>
         <div className="container__div2">
@@ -179,6 +179,7 @@ const AddNote = () => {
 
               <div className="note-form__description">
                 <MDEditor
+                  height={400}
                   value={content}
                   onChange={setContent}
                   textareaProps={{

@@ -3,7 +3,7 @@ import ListofNotes from "../../component/ListofNotes/ListofNotes";
 import "./Home.scss";
 import { getAllNotes, getCategoryByKeyword } from "../../utils/data.service";
 import { toast } from "react-toastify";
-import { Icon, Input } from "semantic-ui-react";
+import { Input } from "semantic-ui-react";
 
 const fetchData = async (setNotes) => {
   try {
