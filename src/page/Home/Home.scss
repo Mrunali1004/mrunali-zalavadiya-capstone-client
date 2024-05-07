@@ -5,7 +5,11 @@
 .notes-search {
   display: flex;
   flex-direction: column;
-  padding-top: 88.8px;
+  padding-top: 167.15px;
+
+  @include tablet {
+    padding-top: 88.8px;
+  }
 
   &__input {
     @include tablet {

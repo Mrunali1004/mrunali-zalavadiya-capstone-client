@@ -64,6 +64,7 @@
     border: 3px dotted $secondary;
     padding: 1rem;
     background-color: $secondary-four;
+    color: $secondary;
 
     @include tablet {
       @include tablet-heading-2;
