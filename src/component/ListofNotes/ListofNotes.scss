@@ -1,0 +1,150 @@
+@use "../../styles/partials/globals.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.notes {
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  margin-top: 1rem;
+  align-items: center;
+
+  @include tablet {
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  &__add {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  &__add-content {
+    background-color: $primary-four;
+    height: 250px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border: 2px dotted $out-line-color;
+    color: $font-color-dark;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__no-results {
+    @include mobile-heading-1;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    padding-top: 1rem;
+
+    @include tablet {
+      @include tablet-heading-2;
+    }
+  }
+}
+
+.listh1 {
+  padding-bottom: 1rem;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.category {
+  color: black;
+}
+
+.listitem {
+  flex-grow: 1;
+}
+
+.card {
+  background-color: $primary-four;
+  height: 250px;
+  width: 390px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+  flex-direction: column;
+  border-radius: 4px;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.btn1 {
+  cursor: pointer;
+  background-color: $secondary;
+  padding: 1rem;
+  width: 100%;
+  color: $text-color;
+  border: none;
+  text-align: center;
+}
+
+.editor {
+  overflow: hidden;
+}
+
+.division {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.custom-segment {
+  &.ui.segment {
+    padding: 0;
+  }
+  .card {
+    margin: 0;
+  }
+
+  .card {
+    gap: 0;
+    .title {
+      margin-bottom: 16px;
+      @include tablet-heading-1;
+      font-weight: 700;
+      color: $secondary !important;
+    }
+    .editor {
+      height: 100%;
+      background-color: transparent;
+      @include tablet-body-p1;
+      font-weight: 400;
+    }
+    .small {
+      color: $font-color-dark;
+      font-weight: 700;
+      @include tablet-body-p1;
+    }
+  }
+}
+.ui.segment:last-child {
+  margin-bottom: 14px !important;
+  cursor: pointer;
+}
+
+.ui.attached.label,
+.ui[class*="top attached"].label {
+  background-color: $secondary;
+  color: $text-color;
+  font-weight: 700;
+  @include tablet-heading-3;
+}
+
+.delete {
+  cursor: pointer;
+}

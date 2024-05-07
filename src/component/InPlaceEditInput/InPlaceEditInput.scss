@@ -1,0 +1,21 @@
+@use "../../styles/partials/globals.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+
+.categories-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include tablet-body-p1;
+  font-weight: 700;
+  color: $font-color-dark;
+  padding-bottom: 0.625rem;
+}
+
+.iconbutton {
+  background-color: $secondary !important;
+  color: $text-color !important;
+  border: none !important;
+  padding: 10px !important;
+}

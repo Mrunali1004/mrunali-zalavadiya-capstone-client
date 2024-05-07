@@ -2,12 +2,23 @@
 @use "../../styles/partials/variable.scss" as *;
 @use "../../styles/partials/mixins.scss" as *;
 
+.ui.segment {
+  width: 300px !important;
+}
+
 .site-login {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: $primary-color;
+  height: 84vh;
+  margin: 0 auto;
+  width: 100%;
+  padding-top: 88.8px;
+}
+.hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px; /* Adjust margin as needed */
 }
 
 .form {
@@ -16,12 +27,7 @@
 
   @include tablet {
     padding: 0;
-    width: 50%;
   }
-}
-
-.form-label {
-  color: $primary-four;
 }
 
 .form-button {
@@ -31,7 +37,24 @@
   width: 100%;
   padding-top: 1rem;
 
-  &__btn {
+  &__btnnn {
+    background-color: $secondary;
+    color: $text-color;
     width: 100%;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
   }
+}
+
+.form-data {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-labell {
+  color: black;
+  font-weight: bold;
 }

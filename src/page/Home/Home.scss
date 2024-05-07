@@ -1,0 +1,39 @@
+@use "../../styles/partials/globals.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.notes-search {
+  display: flex;
+  flex-direction: column;
+  padding-top: 167.15px;
+
+  @include tablet {
+    padding-top: 88.8px;
+  }
+
+  &__input {
+    @include tablet {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  &__input-field {
+    @include Input;
+    @include InputFocus;
+
+    @include tablet {
+      width: 387px;
+    }
+  }
+
+  &__notes-list {
+    @include tablet {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

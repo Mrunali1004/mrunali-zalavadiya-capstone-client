@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+### Personal-Notes Hub - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Overview
 
-## Available Scripts
+PersonalNotesHub is a digital platform designed for individuals to organize and manage their personal notes effortlessly.
 
-In the project directory, you can run:
+### Features
 
-### `npm start`
+1. User Authentication: Allows users to register and login securely.
+2. Note Management: Users can create, edit, categorize, search, and delete notes.
+3. Category Management: Users can add, edit, and delete note categories.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Tech Stack
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+This section should list any major frameworks/libraries used to bootstrap my project. Here are a few examples.
 
-### `npm test`
+- Frontend: React
+- Backend: Express
+- Database: MySQL
+- Client Libraries: React, React Router, Axios
+- Server Libraries: Knex, Express, Bcrypt, JSONWebtoken
+- Enhanced Notes Editor: Implement Markdown support for  
+  formatting notes.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Implementation
 
-### `npm run build`
+### Frontend
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The frontend of PersonalNotesHub is built using React, providing a dynamic user interface. The app utilizes React Router for navigation and Axios for making HTTP requests to the backend API.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Backend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The backend of PersonalNotesHub is built using Express, a web application framework for Node.js. It interacts with the MySQL database using Knex, a SQL query builder. Bcrypt is used for password hashing, and JSONWebtoken is used for authentication.
 
-### `npm run eject`
+### Getting Started
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To run PersonalNotesHub locally, follow these steps:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone the repository.
+2. Install dependencies: npm install.
+3. Set up the database:
+   1. Install MYSQL
+   2. Add credentials to env file
+   3. Run migration `knex migrate:latest`
+4. Start the backend server: npm start.
+5. Start the frontend development server: npm start.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### sample env
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```ini
+PORT=1010
+CLIENT_URL=http://localhost:3000
+JWT_SECRET=
+# use any secret to sign jwt tokens
+DB_HOST=127.0.0.1
+DB_USER=root
+DB_PASSWORD=rootroot
+DB_DATABASE=personal_note_hub
+```
 
-## Learn More
+### API Endpoints
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- POST /auth/signup: Register a new user.
+- POST /auth/login: Login a user.
+- GET /notes: Get a list of notes.
+- GET /notes/category/:id: Get notes by category.
+- POST /notes: Add a new note.
+- PUT /notes/:id: Update a note.
+- DELETE /notes/:id: Delete a note.
+- POST /category: Add a new category.
+- PUT /category/:id: Update a category.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Contributing
 
-### Code Splitting
+We welcome contributions to enhance PersonalNotesHub! If you'd like to contribute, please follow these steps:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Fork the repository to your own GitHub account.
+2. Clone the repository to your local machine.
 
-### Analyzing the Bundle Size
+`git clone https://github.com/your-username/personal-notes-hub.git`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+3. Create a new branch for your changes.
 
-### Making a Progressive Web App
+`git checkout -b feature/your-feature-name`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+4. Make your changes and commit them to your branch.
 
-### Advanced Configuration
+`git add .`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+`git commit -m "Add your feature or fix"`
 
-### Deployment
+5. Push your changes to your forked repository.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+`git push origin feature/your-feature-name`
 
-### `npm run build` fails to minify
+Please ensure your pull request adheres to the following guidelines:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Describe the purpose of your changes.
+Keep the pull request focused on a single feature or fix.
+Ensure any installed dependencies are properly documented if they are added or updated.
+Test your changes thoroughly before submitting the pull request.
+Thank you for your contribution to making PersonalNotesHub even better!
+
+### Contact
+
+For inquiries or support, please contact Mrunali Zalavadiya at [mrunalizalavadiya@email.com].

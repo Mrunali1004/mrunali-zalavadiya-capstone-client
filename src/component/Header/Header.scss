@@ -1,0 +1,116 @@
+@use "../../styles/partials/globals.scss" as *;
+@use "../../styles/partials/mixins.scss" as *;
+@use "../../styles/partials/variable.scss" as *;
+@use "../../styles/partials/typography.scss" as *;
+
+.ui.modal {
+  width: 90%;
+  height: auto;
+
+  @include tablet {
+    width: 40%;
+    height: auto;
+  }
+
+  @include desktop {
+    width: 600px;
+    height: auto;
+  }
+}
+
+.logout {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-weight: 400;
+  @include mobile-heading-2;
+  color: $secondary;
+}
+
+.site-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $text-color;
+  padding: $mobile-padding;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+
+  @include tablet {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem $tablet-padding;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__logo {
+    height: 50px;
+    width: 50px;
+  }
+
+  &__title {
+    @include mobile-heading-1;
+    font-weight: 700;
+    margin: 0;
+    border: 3px dotted $secondary;
+    padding: 1rem;
+    background-color: $secondary-four;
+    color: $secondary;
+
+    @include tablet {
+      @include tablet-heading-2;
+      color: $secondary;
+      font-weight: bold;
+    }
+  }
+  &__user-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    @include tablet {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      gap: 20px;
+      padding: 0;
+    }
+  }
+
+  &__user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+
+    @include tablet {
+      flex-direction: row;
+    }
+  }
+
+  &__userwrapper {
+    flex: 1;
+  }
+
+  &__username {
+    @include mobile-body-p1;
+    font-weight: 700;
+
+    @include tablet {
+      @include mobile-heading-2;
+      color: $secondary;
+    }
+  }
+}
