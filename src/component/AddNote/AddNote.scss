@@ -138,17 +138,9 @@ i.icons {
   }
 }
 
-// .w-md-editor {
-//   .w-md-editor-text-input  {
-//     height: unset !important;
-//     min-height: unset !important;
-//     max-height: unset !important;
-// }
-// }
-
-.ui.form textarea:not([rows]){
-      height: 100% !important;
-    min-height: unset !important;
-    max-height: unset !important;
-    border: none;
+.ui.form textarea:not([rows]) {
+  height: 100% !important;
+  min-height: unset !important;
+  max-height: unset !important;
+  border: none;
 }
